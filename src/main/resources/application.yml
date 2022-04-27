@@ -1,0 +1,45 @@
+server:
+  port: 9090
+  servlet:
+    context-path: /demo
+  undertow:
+    max-http-post-size: 0
+
+spring:
+  application:
+    name: demo
+  main:
+    allow-bean-definition-overriding: true
+  jpa:
+    properties.hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+  thymeleaf:
+    cache: false
+    check-template-location: true
+    mode: LEGACYHTML5
+    prefix: classpath:/templates/
+    suffix: .html
+    template-resolver-order: 1
+  datasource:
+    url: jdbc:mysql://localhost:3306/myDB
+    username: root
+    password: 123456
+  jackson:
+    default-property-inclusion: non_absent
+
+#  logging:
+#    level:
+#      root: INFO
+#      org.springframework.web: DEBUG
+#      org.springframework.security: DEBUG
+#      org.springframework.boot.autoconfigure: INFO
+#      org.springframework.web.client.RestTemplate: DEBUG
+
+keycloak:
+  enabled: true
+  auth-server-url: http://localhost:8080/auth
+  realm: demo-realm
+  resource: demo-client
+  ssl-required: none
+  credentials.secret: 12b92093-4336-426d-8267-f89b31d347f7
+  bearer-only: true
+  principal-attribute: preferred_username
