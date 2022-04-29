@@ -1,5 +1,7 @@
 package com.demo.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -26,8 +28,15 @@ public class ProductDto implements Serializable {
     @Column(name = "CATEGORY")
     private String category;
 
+    @Transient
+    @JsonProperty
     private Integer pageSize;
+
+    @Transient
+    @JsonProperty
     private Integer currentPage;
+
+    public ProductDto() {}
 
     public ProductDto(Integer qty, String name, String description, String owner, String category) {
         this.qty = qty;
@@ -36,8 +45,6 @@ public class ProductDto implements Serializable {
         this.owner = owner;
         this.category = category;
     }
-
-    public ProductDto() {}
 
     public Integer getPageSize() {
         return pageSize;

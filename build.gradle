@@ -32,11 +32,12 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 //	testImplementation 'org.springframework.boot:spring-security-test'
 //	testImplementation 'org.keycloak:keycloak-test-helper'
+	implementation 'com.h2database:h2:1.3.148'
 
 	// Keycloak
 //	implementation group: 'org.keycloak', name: 'keycloak-spring-boot-starter', version: '16.1.0'
-	implementation group: 'org.keycloak', name: 'keycloak-spring-boot-2-starter', version: '4.0.0.Final'
-	implementation group: 'org.keycloak.bom', name: 'keycloak-adapter-bom', version: '16.1.0', ext: 'pom'
+//	implementation group: 'org.keycloak', name: 'keycloak-spring-boot-2-starter', version: '4.0.0.Final'
+//	implementation group: 'org.keycloak.bom', name: 'keycloak-adapter-bom', version: '16.1.0', ext: 'pom'
 }
 
 tasks.named('test') {
