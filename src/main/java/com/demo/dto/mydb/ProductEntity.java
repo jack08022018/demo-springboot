@@ -1,4 +1,4 @@
-package com.demo.dto;
+package com.demo.dto.mydb;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "PRODUCT")
-public class ProductDto implements Serializable {
+public class ProductEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
@@ -36,9 +36,9 @@ public class ProductDto implements Serializable {
     @JsonProperty
     private Integer currentPage;
 
-    public ProductDto() {}
+    public ProductEntity() {}
 
-    public ProductDto(Integer qty, String name, String description, String owner, String category) {
+    public ProductEntity(Integer qty, String name, String description, String owner, String category) {
         this.qty = qty;
         this.name = name;
         this.description = description;

@@ -1,7 +1,6 @@
 package com.demo;
 
-import com.demo.dto.ProductDto;
-import com.demo.repository.ProductRepository;
+import com.demo.repository.myDB.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

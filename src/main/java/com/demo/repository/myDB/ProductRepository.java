@@ -1,6 +1,6 @@
-package com.demo.repository;
+package com.demo.repository.myDB;
 
-import com.demo.dto.ProductDto;
+import com.demo.dto.mydb.ProductEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductRepository extends JpaRepository<ProductDto, Long> {
+public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
     @Query(nativeQuery = true, value = ""
             +   "SELECT A.* "
             +   "FROM PRODUCT A "
@@ -18,5 +18,5 @@ public interface ProductRepository extends JpaRepository<ProductDto, Long> {
             +   "SELECT COUNT(*) "
             +   "FROM PRODUCT A "
             +   "WHERE (:#{#params.name} IS NULL OR A.NAME LIKE %:#{#params.name}%) ")
-    Page<ProductDto> getProductList(@Param("params") ProductDto params, Pageable pageable);
+    Page<ProductEntity> getProductList(@Param("params") ProductEntity params, Pageable pageable);
 }

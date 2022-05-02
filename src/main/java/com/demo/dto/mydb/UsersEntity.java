@@ -1,11 +1,11 @@
-package com.demo.dto;
+package com.demo.dto.mydb;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "USERS")
+@Table(name = "USERS", schema = "mydb")
 public class UsersEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

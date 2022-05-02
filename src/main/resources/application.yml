@@ -10,23 +10,6 @@ spring:
     name: demo
   main:
     allow-bean-definition-overriding: true
-  jpa:
-    properties.hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-    show-sql: true
-  thymeleaf:
-    cache: false
-    check-template-location: true
-    mode: LEGACYHTML5
-    prefix: classpath:/templates/
-    suffix: .html
-    template-resolver-order: 1
-  datasource:
-    url: jdbc:mysql://localhost:3306/myDB
-    username: root
-    password: 123456
-  jackson:
-    default-property-inclusion: non_absent
-
   logging:
     level:
       root: INFO
@@ -34,6 +17,31 @@ spring:
       org.springframework.security: DEBUG
       org.springframework.boot.autoconfigure: INFO
       org.springframework.web.client.RestTemplate: DEBUG
+  thymeleaf:
+    cache: false
+    check-template-location: true
+    mode: LEGACYHTML5
+    prefix: classpath:/templates/
+    suffix: .html
+    template-resolver-order: 1
+  jpa:
+    properties.hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+#    database: mysql
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/myDB
+#    username: root
+#    password: 123456
+  jackson:
+    default-property-inclusion: non_absent
+
+app.datasource.mydb.url: jdbc:mysql://localhost:3306/myDB
+app.datasource.mydb.username: root
+app.datasource.mydb.password: 123456
+
+app.datasource.sakila.url: jdbc:mysql://localhost:3306/sakila
+app.datasource.sakila.username: root
+app.datasource.sakila.password: 123456
 
 #keycloak:
 #  enabled: true

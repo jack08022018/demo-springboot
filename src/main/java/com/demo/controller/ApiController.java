@@ -1,24 +1,23 @@
 package com.demo.controller;
 
 
-import com.demo.dto.ProductDto;
-import com.demo.dto.UsersEntity;
+import com.demo.dto.mydb.ProductEntity;
+import com.demo.dto.mydb.UsersEntity;
 //import com.demo.pdf.PDFGenerator;
+import com.demo.repository.myDB.ProductRepository;
+import com.demo.repository.myDB.UsersRepository;
 import com.demo.service.ProductService;
+import com.demo.springJMS.JMSProducer;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.io.ByteArrayInputStream;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -28,8 +27,16 @@ public class ApiController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private JMSProducer jMSProducer;
+
+    @PostMapping(value = "/sendMessage")
+    public void sendMessage() {
+        jMSProducer.sendMessage("1");
+    }
+
     @PostMapping(value = "/products")
-    public Page<ProductDto> products(@RequestBody ProductDto dto) {
+    public Page<ProductEntity> products(@RequestBody ProductEntity dto) {
         return productService.getProductList(dto);
     }
 
@@ -44,6 +51,11 @@ public class ApiController {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode jsonNode = mapper.readTree(jsonStr);
         return jsonNode;
+    }
+
+    @PostMapping(value = "/addUser")
+    public void addUser() {
+        productService.addUser();
     }
 
 //    @GetMapping(value = "/exportPdf", produces = MediaType.APPLICATION_PDF_VALUE)
