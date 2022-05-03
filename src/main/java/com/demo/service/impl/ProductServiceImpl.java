@@ -2,9 +2,11 @@ package com.demo.service.impl;
 
 import com.demo.configuration.exceptionHandler.exception.NoRollbackException;
 import com.demo.dto.mydb.ProductEntity;
+import com.demo.dto.mydb.UserDetailsEntity;
 import com.demo.dto.mydb.UsersEntity;
 import com.demo.dto.sakila.ActorEntity;
 import com.demo.repository.myDB.ProductRepository;
+import com.demo.repository.myDB.UserDetailsRepository;
 import com.demo.repository.myDB.UsersRepository;
 import com.demo.repository.sakila.ActorRepository;
 import com.demo.service.ProductService;
@@ -28,6 +30,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ActorRepository actorRepository;
+
+    @Autowired
+    private UserDetailsRepository userDetailsRepository;
 
     @Override
     public Page<ProductEntity> getProductList(ProductEntity dto) {
@@ -62,6 +67,12 @@ public class ProductServiceImpl implements ProductService {
             s.setFirstName("PENELOPE");
             actorRepository.save(s);
         });
+    }
+
+    @Override
+    public Page<UserDetailsEntity> getUserDetailsList(UserDetailsEntity dto) {
+        Pageable pageable = PageRequest.of(dto.getCurrentPage(), dto.getPageSize());
+        return userDetailsRepository.getUserDetailsList(pageable);
     }
 
 }

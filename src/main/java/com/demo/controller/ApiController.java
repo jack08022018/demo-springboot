@@ -2,6 +2,7 @@ package com.demo.controller;
 
 
 import com.demo.dto.mydb.ProductEntity;
+import com.demo.dto.mydb.UserDetailsEntity;
 import com.demo.dto.mydb.UsersEntity;
 import com.demo.service.ProductService;
 import com.demo.springJMS.JMSProducer;
@@ -33,6 +34,11 @@ public class ApiController {
     @PostMapping(value = "/sendMessage")
     public void sendMessage() {
         jMSProducer.sendMessage("1");
+    }
+
+    @PostMapping(value = "/getUserDetailsList")
+    public Page<UserDetailsEntity> getUserDetailsList(@RequestBody UserDetailsEntity dto) {
+        return productService.getUserDetailsList(dto);
     }
 
     @PostMapping(value = "/products")
