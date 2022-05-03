@@ -1,6 +1,7 @@
 package com.demo.controller;
 
 
+import com.demo.configuration.exception.NoRollbackException;
 import com.demo.dto.mydb.ProductEntity;
 import com.demo.dto.mydb.UsersEntity;
 //import com.demo.pdf.PDFGenerator;
@@ -54,7 +55,7 @@ public class ApiController {
     }
 
     @PostMapping(value = "/addUser")
-    public void addUser() {
+    public void addUser() throws Exception {
         productService.addUser();
     }
 

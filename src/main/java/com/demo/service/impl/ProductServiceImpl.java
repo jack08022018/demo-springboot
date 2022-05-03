@@ -1,5 +1,6 @@
 package com.demo.service.impl;
 
+import com.demo.configuration.exception.NoRollbackException;
 import com.demo.dto.mydb.ProductEntity;
 import com.demo.dto.mydb.UsersEntity;
 import com.demo.dto.sakila.ActorEntity;
@@ -40,8 +41,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    @Transactional
-    public void addUser() {
+    @Transactional(rollbackFor = Exception.class, noRollbackFor = NoRollbackException.class)
+    public void addUser() throws Exception {
         Optional<UsersEntity> entity = usersRepository.findById(4L);
         entity.ifPresent(s -> {
             s.setFullName("Thùy Nhung");
@@ -49,7 +50,11 @@ public class ProductServiceImpl implements ProductService {
             usersRepository.save(s);
         });
 
-//        int a = 1/0;
+        try {
+            int a = 1/0;
+        }catch (Exception e) {
+            throw new NoRollbackException(e.getMessage());
+        }
 
         Optional<ActorEntity> actor = actorRepository.findById(1L);
         actor.ifPresent(s -> {
@@ -58,4 +63,5 @@ public class ProductServiceImpl implements ProductService {
             actorRepository.save(s);
         });
     }
+
 }

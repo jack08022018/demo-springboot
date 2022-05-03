@@ -9,5 +9,5 @@ import java.util.List;
 public interface ProductService {
     Page<ProductEntity> getProductList(ProductEntity dto);
     List<UsersEntity> getUsers();
-    void addUser();
+    void addUser() throws Exception;
 }
