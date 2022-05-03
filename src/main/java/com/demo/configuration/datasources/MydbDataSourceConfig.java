@@ -8,6 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -21,12 +22,14 @@ import javax.sql.DataSource;
             transactionManagerRef= "mydbTransactionManager")
 public class MydbDataSourceConfig {
     @Bean
+    @Primary
     @ConfigurationProperties("app.datasource.mydb")
     public DataSourceProperties mydbProperties() {
         return new DataSourceProperties();
     }
 
     @Bean
+    @Primary
     @ConfigurationProperties("app.datasource.mydb.configuration")
     public DataSource mydbDataSource() {
         return mydbProperties().initializeDataSourceBuilder()
@@ -34,6 +37,7 @@ public class MydbDataSourceConfig {
                 .build();
     }
 
+    @Primary
     @Bean(name = "mydbEntityManagerFactory")
     public LocalContainerEntityManagerFactoryBean mydbEntityManagerFactory(EntityManagerFactoryBuilder builder) {
         return builder.dataSource(mydbDataSource())
@@ -42,6 +46,7 @@ public class MydbDataSourceConfig {
     }
 
     @Bean
+    @Primary
     public PlatformTransactionManager mydbTransactionManager(
             final @Qualifier("mydbEntityManagerFactory")
             LocalContainerEntityManagerFactoryBean mydbEntityManagerFactory) {
