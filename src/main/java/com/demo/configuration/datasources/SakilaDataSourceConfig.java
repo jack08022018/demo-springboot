@@ -20,31 +20,34 @@ import javax.sql.DataSource;
             entityManagerFactoryRef = "sakilaEntityManagerFactory",
             transactionManagerRef= "sakilaTransactionManager")
 public class SakilaDataSourceConfig {
-    @Bean
+
+    @Bean(name = "sakilaProperties")
     @ConfigurationProperties("app.datasource.sakila")
-    public DataSourceProperties sakilaProperties() {
+    public DataSourceProperties getProperties() {
         return new DataSourceProperties();
     }
 
-    @Bean
+    @Bean(name = "sakilaDataSource")
     @ConfigurationProperties("app.datasource.sakila.configuration")
-    public DataSource sakilaDataSource() {
-        return sakilaProperties().initializeDataSourceBuilder()
+    public DataSource getDataSource() {
+        return getProperties()
+                .initializeDataSourceBuilder()
                 .type(BasicDataSource.class)
                 .build();
     }
 
     @Bean(name = "sakilaEntityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean sakilaEntityManagerFactory(EntityManagerFactoryBuilder builder) {
-        return builder.dataSource(sakilaDataSource())
+    public LocalContainerEntityManagerFactoryBean getEntityManagerFactory(EntityManagerFactoryBuilder builder) {
+        return builder
+                .dataSource(getDataSource())
                 .packages(ActorEntity.class)
                 .build();
     }
 
-    @Bean
-    public PlatformTransactionManager sakilaTransactionManager(
+    @Bean(name = "sakilaTransactionManager")
+    public PlatformTransactionManager getTransactionManager(
             final @Qualifier("sakilaEntityManagerFactory")
-            LocalContainerEntityManagerFactoryBean sakilaEntityManagerFactory) {
-        return new JpaTransactionManager(sakilaEntityManagerFactory.getObject());
+            LocalContainerEntityManagerFactoryBean entityManagerFactory) {
+        return new JpaTransactionManager(entityManagerFactory.getObject());
     }
 }

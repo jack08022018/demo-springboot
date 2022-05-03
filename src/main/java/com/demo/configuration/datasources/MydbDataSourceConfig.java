@@ -21,35 +21,37 @@ import javax.sql.DataSource;
             entityManagerFactoryRef = "mydbEntityManagerFactory",
             transactionManagerRef= "mydbTransactionManager")
 public class MydbDataSourceConfig {
-    @Bean
     @Primary
+    @Bean(name = "mydbProperties")
     @ConfigurationProperties("app.datasource.mydb")
-    public DataSourceProperties mydbProperties() {
+    public DataSourceProperties getProperties() {
         return new DataSourceProperties();
     }
 
-    @Bean
     @Primary
+    @Bean(name = "mydbDataSource")
     @ConfigurationProperties("app.datasource.mydb.configuration")
-    public DataSource mydbDataSource() {
-        return mydbProperties().initializeDataSourceBuilder()
+    public DataSource getDataSource() {
+        return getProperties()
+                .initializeDataSourceBuilder()
                 .type(BasicDataSource.class)
                 .build();
     }
 
     @Primary
     @Bean(name = "mydbEntityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean mydbEntityManagerFactory(EntityManagerFactoryBuilder builder) {
-        return builder.dataSource(mydbDataSource())
+    public LocalContainerEntityManagerFactoryBean getEntityManagerFactory(EntityManagerFactoryBuilder builder) {
+        return builder
+                .dataSource(getDataSource())
                 .packages(UsersEntity.class)
                 .build();
     }
 
-    @Bean
     @Primary
-    public PlatformTransactionManager mydbTransactionManager(
+    @Bean(name = "mydbTransactionManager")
+    public PlatformTransactionManager getTransactionManager(
             final @Qualifier("mydbEntityManagerFactory")
-            LocalContainerEntityManagerFactoryBean mydbEntityManagerFactory) {
-        return new JpaTransactionManager(mydbEntityManagerFactory.getObject());
+            LocalContainerEntityManagerFactoryBean entityManagerFactory) {
+        return new JpaTransactionManager(entityManagerFactory.getObject());
     }
 }

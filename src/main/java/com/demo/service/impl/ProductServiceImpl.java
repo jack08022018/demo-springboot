@@ -50,11 +50,11 @@ public class ProductServiceImpl implements ProductService {
             usersRepository.save(s);
         });
 
-        try {
-            int a = 1/0;
-        }catch (Exception e) {
-            throw new NoRollbackException(e.getMessage());
-        }
+//        try {
+//            int a = 1/0;
+//        }catch (Exception e) {
+//            throw new NoRollbackException(e.getMessage());
+//        }
 
         Optional<ActorEntity> actor = actorRepository.findById(1L);
         actor.ifPresent(s -> {
