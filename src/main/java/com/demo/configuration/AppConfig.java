@@ -1,5 +1,6 @@
 package com.demo.configuration;
 
+import com.demo.configuration.exceptionHandler.RestTemplateResponseErrorHandler;
 import com.demo.configuration.filters.MainFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;

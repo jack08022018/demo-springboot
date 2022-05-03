@@ -1,4 +1,4 @@
-package com.demo.configuration;
+package com.demo.configuration.exceptionHandler;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpResponse;

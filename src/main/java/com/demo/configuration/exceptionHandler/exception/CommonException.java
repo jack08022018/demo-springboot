@@ -1,4 +1,4 @@
-package com.demo.configuration.exception;
+package com.demo.configuration.exceptionHandler.exception;
 
 public class CommonException extends Exception {
     public CommonException() {}

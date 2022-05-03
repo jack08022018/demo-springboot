@@ -1,4 +1,4 @@
-package com.demo.configuration.exception;
+package com.demo.configuration.exceptionHandler.exception;
 
 public class NoRollbackException extends Exception {
     public NoRollbackException() {}

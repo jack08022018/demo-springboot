@@ -1,4 +1,4 @@
-package com.demo.configuration.exception;
+package com.demo.configuration.exceptionHandler.exception;
 
 import java.io.Serializable;
 import java.sql.Timestamp;

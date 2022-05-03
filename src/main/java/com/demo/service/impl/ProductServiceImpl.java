@@ -1,6 +1,6 @@
 package com.demo.service.impl;
 
-import com.demo.configuration.exception.NoRollbackException;
+import com.demo.configuration.exceptionHandler.exception.NoRollbackException;
 import com.demo.dto.mydb.ProductEntity;
 import com.demo.dto.mydb.UsersEntity;
 import com.demo.dto.sakila.ActorEntity;

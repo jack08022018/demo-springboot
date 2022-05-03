@@ -16,7 +16,7 @@ spring:
   thymeleaf:
     cache: false
     check-template-location: true
-    mode: LEGACYHTML5
+    mode: HTML
     prefix: classpath:/templates/
     suffix: .html
     template-resolver-order: 1
