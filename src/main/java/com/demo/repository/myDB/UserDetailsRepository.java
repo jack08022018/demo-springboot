@@ -1,7 +1,6 @@
 package com.demo.repository.myDB;
 
-import com.demo.dto.mydb.ProductEntity;
-import com.demo.dto.mydb.UserDetailsEntity;
+import com.demo.entity.mydb.UserDetailsEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

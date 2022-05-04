@@ -1,10 +1,10 @@
 package com.demo.controller;
 
 
-import com.demo.dto.mydb.ProductEntity;
-import com.demo.dto.mydb.UserDetailsEntity;
-import com.demo.dto.mydb.UsersEntity;
-import com.demo.dto.dto.ActorDto;
+import com.demo.entity.mydb.ProductEntity;
+import com.demo.entity.mydb.UserDetailsEntity;
+import com.demo.entity.mydb.UsersEntity;
+import com.demo.dto.ActorDto;
 import com.demo.service.ProductService;
 import com.demo.springJMS.JMSProducer;
 import com.fasterxml.jackson.core.JsonProcessingException;

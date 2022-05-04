@@ -1,6 +1,4 @@
-package com.demo.dto.sakila;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
+package com.demo.entity.sakila;
 
 import javax.persistence.*;
 import java.io.Serializable;

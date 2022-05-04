@@ -1,4 +1,4 @@
-package com.demo.dto.mydb;
+package com.demo.entity.mydb;
 
 import javax.persistence.*;
 import java.io.Serializable;

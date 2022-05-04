@@ -1,7 +1,7 @@
 package com.demo.repository.sakila;
 
-import com.demo.dto.dto.ActorDto;
-import com.demo.dto.sakila.ActorEntity;
+import com.demo.dto.ActorDto;
+import com.demo.entity.sakila.ActorEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

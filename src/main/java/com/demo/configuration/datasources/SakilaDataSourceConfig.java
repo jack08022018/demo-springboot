@@ -1,6 +1,6 @@
 package com.demo.configuration.datasources;
 
-import com.demo.dto.sakila.ActorEntity;
+import com.demo.entity.sakila.ActorEntity;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;

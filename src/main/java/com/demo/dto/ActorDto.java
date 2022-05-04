@@ -1,4 +1,4 @@
-package com.demo.dto.dto;
+package com.demo.dto;
 
 public interface ActorDto {
     Integer getActorId();

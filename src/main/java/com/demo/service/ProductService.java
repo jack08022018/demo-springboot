@@ -1,9 +1,9 @@
 package com.demo.service;
 
-import com.demo.dto.mydb.ProductEntity;
-import com.demo.dto.mydb.UserDetailsEntity;
-import com.demo.dto.mydb.UsersEntity;
-import com.demo.dto.dto.ActorDto;
+import com.demo.entity.mydb.ProductEntity;
+import com.demo.entity.mydb.UserDetailsEntity;
+import com.demo.entity.mydb.UsersEntity;
+import com.demo.dto.ActorDto;
 import org.springframework.data.domain.Page;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.demo.dto.mydb;
+package com.demo.entity.mydb;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

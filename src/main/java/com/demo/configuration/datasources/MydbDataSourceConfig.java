@@ -1,6 +1,6 @@
 package com.demo.configuration.datasources;
 
-import com.demo.dto.mydb.UsersEntity;
+import com.demo.entity.mydb.UsersEntity;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;

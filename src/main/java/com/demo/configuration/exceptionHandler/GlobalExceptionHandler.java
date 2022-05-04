@@ -34,8 +34,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(NoRollbackException.class)
-    public ResponseEntity<ErrorResponse> NoRollbackExceptionHandler(NoRollbackException e, HandlerMethod handlerMethod, HttpServletRequest request) {
-        logger.info("mainExceptionHandler\n", e);
+    public ResponseEntity<ErrorResponse> noRollbackExceptionHandler(NoRollbackException e, HandlerMethod handlerMethod, HttpServletRequest request) {
+        logger.info("noRollbackExceptionHandler\n", e);
         ErrorResponse response = ErrorResponse.builder()
                 .setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value())
                 .setMessage(e.getMessage())
