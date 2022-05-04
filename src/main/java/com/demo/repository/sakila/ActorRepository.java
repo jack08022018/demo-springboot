@@ -13,6 +13,7 @@ public interface ActorRepository extends JpaRepository<ActorEntity, Integer> {
     @Query("select new ActorEntity(a.actorId, a.firstName) from ActorEntity a WHERE a.actorId = 1")
     List<ActorEntity> getActor();
 
+//    https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#projections
     @Query(nativeQuery = true, value = ""
             +   "select a.ACTOR_ID as actorId, a.FIRST_NAME as firstName, c.title "
             +   "from actor a "
