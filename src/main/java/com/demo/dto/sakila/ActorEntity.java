@@ -1,5 +1,7 @@
 package com.demo.dto.sakila;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -10,22 +12,29 @@ public class ActorEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ACTOR_ID")
-    private Long actorId;
+    private Integer actorId;
 
     @Column(name = "FIRST_NAME")
     private String firstName;
 
-    @Column(name = "LAST_NAME")
+    @Column(name = "LAST_NAME", nullable = true)
     private String lastName;
 
-    @Column(name = "LAST_UPDATE")
+    @Column(name = "LAST_UPDATE", nullable = true)
     private Date lastUpdate;
 
-    public Long getActorId() {
+    public ActorEntity() {}
+
+    public ActorEntity(Integer actorId, String firstName) {
+        this.actorId = actorId;
+        this.firstName = firstName;
+    }
+
+    public Integer getActorId() {
         return actorId;
     }
 
-    public void setActorId(Long actorId) {
+    public void setActorId(Integer actorId) {
         this.actorId = actorId;
     }
 

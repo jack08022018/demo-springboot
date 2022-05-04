@@ -4,6 +4,7 @@ import com.demo.configuration.exceptionHandler.exception.NoRollbackException;
 import com.demo.dto.mydb.ProductEntity;
 import com.demo.dto.mydb.UserDetailsEntity;
 import com.demo.dto.mydb.UsersEntity;
+import com.demo.dto.dto.ActorDto;
 import com.demo.dto.sakila.ActorEntity;
 import com.demo.repository.myDB.ProductRepository;
 import com.demo.repository.myDB.UserDetailsRepository;
@@ -55,15 +56,15 @@ public class ProductServiceImpl implements ProductService {
             usersRepository.save(s);
         });
 
-//        try {
-//            int a = 1/0;
-//        }catch (Exception e) {
-//            throw new NoRollbackException(e.getMessage());
-//        }
+        try {
+            int a = 1/0;
+        }catch (Exception e) {
+            throw new NoRollbackException(e.getMessage());
+        }
 
-        Optional<ActorEntity> actor = actorRepository.findById(1L);
+        Optional<ActorEntity> actor = actorRepository.findById(1);
         actor.ifPresent(s -> {
-            s.setActorId(1L);
+            s.setActorId(1);
             s.setFirstName("PENELOPE");
             actorRepository.save(s);
         });
@@ -73,6 +74,11 @@ public class ProductServiceImpl implements ProductService {
     public Page<UserDetailsEntity> getUserDetailsList(UserDetailsEntity dto) {
         Pageable pageable = PageRequest.of(dto.getCurrentPage(), dto.getPageSize());
         return userDetailsRepository.getUserDetailsList(pageable);
+    }
+
+    @Override
+    public List<ActorDto> getListFilmByActor() {
+        return actorRepository.getListFilmByActor();
     }
 
 }

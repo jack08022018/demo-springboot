@@ -4,6 +4,7 @@ package com.demo.controller;
 import com.demo.dto.mydb.ProductEntity;
 import com.demo.dto.mydb.UserDetailsEntity;
 import com.demo.dto.mydb.UsersEntity;
+import com.demo.dto.dto.ActorDto;
 import com.demo.service.ProductService;
 import com.demo.springJMS.JMSProducer;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -49,6 +50,11 @@ public class ApiController {
     @PostMapping(value = "/users")
     public List<UsersEntity> users() {
         return productService.getUsers();
+    }
+
+    @PostMapping(value = "/getListFilmByActor")
+    public List<ActorDto> getListFilmByActor() {
+        return productService.getListFilmByActor();
     }
 
     @PostMapping("/getProductData")
