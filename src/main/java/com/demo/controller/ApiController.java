@@ -1,6 +1,7 @@
 package com.demo.controller;
 
 
+import com.demo.dto.FilmInfo;
 import com.demo.entity.mydb.ProductEntity;
 import com.demo.entity.mydb.UserDetailsEntity;
 import com.demo.entity.mydb.UsersEntity;
@@ -22,8 +23,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.ByteArrayInputStream;
 import java.util.List;
-
-//import com.demo.pdf.PDFGenerator;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -56,7 +55,7 @@ public class ApiController {
     }
 
     @PostMapping(value = "/getListFilmByActor")
-    public List<ActorDto> getListFilmByActor() {
+    public <T> List<T> getListFilmByActor() {
         return productService.getListFilmByActor();
     }
 

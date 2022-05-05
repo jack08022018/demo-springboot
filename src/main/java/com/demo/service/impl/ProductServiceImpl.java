@@ -1,6 +1,7 @@
 package com.demo.service.impl;
 
 import com.demo.configuration.exceptionHandler.exception.NoRollbackException;
+import com.demo.dto.FilmInfo;
 import com.demo.entity.mydb.ProductEntity;
 import com.demo.entity.mydb.UserDetailsEntity;
 import com.demo.entity.mydb.UsersEntity;
@@ -77,8 +78,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ActorDto> getListFilmByActor() {
-        return actorRepository.getListFilmByActor();
+    public <T> List<T> getListFilmByActor() {
+        return (List<T>) actorRepository.getListFilmNative();
     }
 
 }
