@@ -1,6 +1,7 @@
 package com.demo.service;
 
 import com.demo.dto.FilmInfo;
+import com.demo.dto.UsersClass;
 import com.demo.entity.mydb.ProductEntity;
 import com.demo.entity.mydb.UserDetailsEntity;
 import com.demo.entity.mydb.UsersEntity;
@@ -15,4 +16,5 @@ public interface ProductService {
     void addUser() throws Exception;
     Page<UserDetailsEntity> getUserDetailsList(UserDetailsEntity dto);
     <T> List<T> getListFilmByActor();
+    <T> List<T> userById(UsersEntity params);
 }

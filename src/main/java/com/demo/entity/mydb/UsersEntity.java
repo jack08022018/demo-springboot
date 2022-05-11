@@ -21,6 +21,18 @@ public class UsersEntity implements Serializable {
     @Column(name = "CREATE_DATE")
     private Date createDate;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "JOB_ID", referencedColumnName = "id")
+    private JobEntity job;
+
+    public JobEntity getJob() {
+        return job;
+    }
+
+    public void setJob(JobEntity job) {
+        this.job = job;
+    }
+
     public Long getId() {
         return id;
     }

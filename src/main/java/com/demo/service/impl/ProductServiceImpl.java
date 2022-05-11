@@ -2,6 +2,7 @@ package com.demo.service.impl;
 
 import com.demo.configuration.exceptionHandler.exception.NoRollbackException;
 import com.demo.dto.FilmInfo;
+import com.demo.dto.UsersClass;
 import com.demo.entity.mydb.ProductEntity;
 import com.demo.entity.mydb.UserDetailsEntity;
 import com.demo.entity.mydb.UsersEntity;
@@ -19,8 +20,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.Tuple;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -80,6 +83,22 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public <T> List<T> getListFilmByActor() {
         return (List<T>) actorRepository.getListFilmNative();
+    }
+
+    @Override
+    public <T> List<T> userById(UsersEntity params) {
+//        List<UsersClass> data = usersRepository.getUserNative(params).stream()
+//                .map(s -> {
+//                    UsersClass info = new UsersClass();
+//                    info.setId((Integer) s.get("id"));
+//                    info.setFullName((String) s.get("FULL_NAME"));
+//                    info.setJobName((String) s.get("JOB_NAME"));
+//                    return info;
+//                })
+//                .collect(Collectors.toList());
+//
+//        return (List<T>) data;
+        return (List<T>) usersRepository.getUserInterface(params);
     }
 
 }

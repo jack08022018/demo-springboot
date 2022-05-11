@@ -2,6 +2,8 @@ package com.demo.controller;
 
 
 import com.demo.dto.FilmInfo;
+import com.demo.dto.UsersClass;
+import com.demo.dto.UsersInterface;
 import com.demo.entity.mydb.ProductEntity;
 import com.demo.entity.mydb.UserDetailsEntity;
 import com.demo.entity.mydb.UsersEntity;
@@ -52,6 +54,12 @@ public class ApiController {
     @PostMapping(value = "/users")
     public List<UsersEntity> users() {
         return productService.getUsers();
+    }
+
+    @ResponseBody
+    @PostMapping(value = "/userById")
+    public <T> List<T> userById(@RequestBody UsersEntity params) {
+        return productService.userById(params);
     }
 
     @PostMapping(value = "/getListFilmByActor")
