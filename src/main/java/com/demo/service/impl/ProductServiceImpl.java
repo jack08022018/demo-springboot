@@ -46,8 +46,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<UsersEntity> getUsers() {
-        return usersRepository.findAll();
+    public <T> List<T> getUsers() {
+//        return (List<T>) usersRepository.findAll();
+        return (List<T>) userDetailsRepository.findAll();
     }
 
     @Override

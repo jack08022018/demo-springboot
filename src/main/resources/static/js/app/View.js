@@ -324,8 +324,77 @@ Ext.define('ext.View', {
 			autoScroll: true,
 			items: [
 				formInfo,
+				{xtype: 'filefield', fieldLabel: 'Photo', buttonText: 'Select Photo...',
+					listeners: {
+						change: function(field, fileName) {
+							var fileList = field.fileInputEl.dom.files;
+							var file = fileList[0];
+							var reader = new FileReader();
+							reader.onload = function(event){
+								let data = reader.result;
+								let arr = data.split(/[\n]/);
+								console.log(arr);
+								arr = _(arr)
+									.map(s => {
+										if(s.includes('-->')) {
+											s = s.replaceAll('\r','');
+											let timeArr = s.split(' --> ');
+											let start = calculTime(timeArr[0]);
+											let end = calculTime(timeArr[1]);
+											return start + ' --> ' + end + '\r';
+										}
+										return s;
+									})
+									.values();
+								// arr.forEach(s => {
+								// 	if(s.includes('-->')) {
+								// 		s = s.replaceAll('\r','');
+								// 		let timeArr = s.split(' --> ');
+								// 		let start = calculTime(timeArr[0]);
+								// 		let end = calculTime(timeArr[1]);
+								// 		s = start + ' --> ' + end + '\r';
+								// 	}
+								// });
+								console.log(arr.join(''))
+							};
+							reader.onerror = function(){
+								console.log('On Error Event');
+							};
+							reader.readAsText(file);
+						}
+					}
+				},
 			],
 		});
+		function calculTime(input) {
+			var arr = input.split(':');
+			var h = parseFloat(arr[0]),
+				m = parseFloat(arr[1]),
+				s = parseFloat(arr[2].replaceAll(',','.'));
+			s = s - 0.5;
+			// 00:58:00.316
+			if(s < 0) {
+				s = s + 60;
+				m = m - 1;
+				if(m < 0) {
+					m = m + 60;
+					h = h - 1;
+				}
+			}else if(s > 60) {
+				s = s - 60;
+				m = m + 1;
+				if(m > 60) {
+					m = m - 60;
+					h = h + 1;
+				}
+			}
+			s = formatNumber(s, 3);
+			if(h < 10) h = '0' + h;
+			if(m < 10) m = '0' + m;
+			if(s < 10) s = '0' + s;
+			return h + ':' + m + ':' + s
+		}
+		// console.log(calculTime('00:58:00.316'));
 
 		this.items = [leftPanel, rightPanel];
 		this.callParent(arguments);

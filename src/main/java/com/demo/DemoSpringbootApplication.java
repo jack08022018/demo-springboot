@@ -1,5 +1,7 @@
 package com.demo;
 
+import com.demo.entity.mongoLocal.GroceryItem;
+import com.demo.repository.mongoLocal.GroceryItemRepository;
 import com.demo.repository.myDB.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -16,8 +18,18 @@ public class DemoSpringbootApplication implements CommandLineRunner {
 	@Autowired
 	ProductRepository productRepository;
 
+	@Autowired
+	GroceryItemRepository groceryItemRepository;
+
 	@Override
 	public void run(String... args) throws Exception {
+//		groceryItemRepository.save(new GroceryItem("Whole Wheat Biscuit", "Whole Wheat Biscuit", 5, "snacks"));
+//		groceryItemRepository.save(new GroceryItem("Kodo Millet", "XYZ Kodo Millet healthy", 2, "millets"));
+//		groceryItemRepository.save(new GroceryItem("Dried Red Chilli", "Dried Whole Red Chilli", 2, "spices"));
+//		groceryItemRepository.save(new GroceryItem("Pearl Millet", "Healthy Pearl Millet", 1, "millets"));
+//		groceryItemRepository.save(new GroceryItem("Cheese Crackers", "Bonny Cheese Crackers Plain", 6, "snacks"));
+//		groceryItemRepository.save(new GroceryItem("Whole Wheat Biscuit", "Whole Wheat Biscuit", 5, "snacks", "Nhung"));
+
 //		ProductDto entity = null;
 //		entity = new ProductDto(32, "Personalized 1", "This is a metal 1", "John Brown 1", "jewellery");
 //		productRepository.save(entity);

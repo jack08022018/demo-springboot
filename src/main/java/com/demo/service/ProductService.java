@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface ProductService {
     Page<ProductEntity> getProductList(ProductEntity dto);
-    List<UsersEntity> getUsers();
+    <T> List<T> getUsers();
     void addUser() throws Exception;
     Page<UserDetailsEntity> getUserDetailsList(UserDetailsEntity dto);
     <T> List<T> getListFilmByActor();

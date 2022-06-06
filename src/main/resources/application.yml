@@ -27,6 +27,9 @@ spring:
   jpa:
     properties.hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     show-sql: true
+  jms:
+    listener:
+      auto-startup: false
 #    database: mysql
 #  datasource:
 #    url: jdbc:mysql://localhost:3306/myDB
@@ -35,6 +38,15 @@ spring:
   jackson:
     default-property-inclusion: non_absent
 
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            core:
+              MongoTemplate: DEBUG
+
 app.datasource.mydb.url: jdbc:mysql://localhost:3306/myDB
 app.datasource.mydb.username: root
 app.datasource.mydb.password: 123456
@@ -42,6 +54,11 @@ app.datasource.mydb.password: 123456
 app.datasource.sakila.url: jdbc:mysql://localhost:3306/sakila
 app.datasource.sakila.username: root
 app.datasource.sakila.password: 123456
+
+app.datasource.mongo-local.url: mongodb://localhost:27017
+app.datasource.mongo-local.database: test
+app.datasource.mongo-local.username:
+app.datasource.mongo-local.password:
 
 #keycloak:
 #  enabled: true
