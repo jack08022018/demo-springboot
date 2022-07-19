@@ -24,9 +24,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<ErrorResponse> mainExceptionHandler(Exception e, HandlerMethod handlerMethod, HttpServletRequest request) {
         logger.info("mainExceptionHandler\n", e);
         ErrorResponse response = ErrorResponse.builder()
-                .setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                .setMessage(e.getMessage())
-                .setPath(request.getRequestURI())
+                .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                .message(e.getMessage())
+                .path(request.getRequestURI())
                 .build();
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -37,9 +37,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<ErrorResponse> noRollbackExceptionHandler(NoRollbackException e, HandlerMethod handlerMethod, HttpServletRequest request) {
         logger.info("noRollbackExceptionHandler\n", e);
         ErrorResponse response = ErrorResponse.builder()
-                .setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                .setMessage(e.getMessage())
-                .setPath(request.getRequestURI())
+                .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                .message(e.getMessage())
+                .path(request.getRequestURI())
                 .build();
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)

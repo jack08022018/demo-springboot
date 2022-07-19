@@ -1,6 +1,9 @@
 package com.demo.common;
 
+import com.demo.controller.ApiController;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Component;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -15,42 +18,46 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+@Component
 public class FunctionCommonUtils {
-    public static LocalDateTime milisecondToLocaleDate(long millis) {
+    @Autowired
+    private Environment env;
+
+    public LocalDateTime milisecondToLocaleDate(long millis) {
         Instant instant = Instant.ofEpochMilli(millis);
         LocalDateTime date = instant.atZone(ZoneId.systemDefault()).toLocalDateTime();
         return date;
     }
-    public static String formatDate(LocalDateTime date, String pattern) {
+    public String localDateToString(LocalDateTime date, String pattern) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
         return date.format(formatter);
     }
-    public static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
+    public <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
         Set<Object> seen = ConcurrentHashMap.newKeySet();
         return t -> seen.add(keyExtractor.apply(t));
     }
-    public static Date stringToDate(String date, String format) {
+    public Date stringToDate(String date, String format) {
         try {
             return new SimpleDateFormat(format).parse(date);
         } catch (ParseException e) {
             return null;
         }
     }
-    public static String dateToString(Date date, String pattern) {
+    public String dateToString(Date date, String pattern) {
         if(date == null) {
             return null;
         }
         SimpleDateFormat format = new SimpleDateFormat(pattern);
         return format.format(date);
     }
-    public static String getPropertyValue(Environment env, String key) throws Exception {
+    public String getPropertyValue(String key) throws Exception {
         String result = env.getProperty(key);
         if(result == null) {
             throw new Exception("Property " + key + " null");
         }
         return result;
     }
-    public static Map<String, String> getSppSignature(String params, String secretKey) throws Exception {
+    public Map<String, String> getSppSignature(String params, String secretKey) throws Exception {
         Mac mac = Mac.getInstance("HmacSHA256");
         mac.init(new SecretKeySpec(secretKey.getBytes(), "HmacSHA256"));
         byte[] hash = mac.doFinal(params.getBytes());

@@ -2,6 +2,10 @@ package com.demo.configuration;
 
 import com.demo.configuration.exceptionHandler.RestTemplateResponseErrorHandler;
 import com.demo.configuration.filters.MainFilter;
+import com.demo.configuration.filters.SubFilter;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +22,7 @@ public class AppConfig {
     @Autowired
     private Environment env;
 
-//    @Bean
+    @Bean
     public FilterRegistrationBean<MainFilter> mainFilter() {
         FilterRegistrationBean<MainFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(new MainFilter());
@@ -26,6 +30,15 @@ public class AppConfig {
         registrationBean.setOrder(1);
         return registrationBean;
     }
+
+//    @Bean
+//    public FilterRegistrationBean<SubFilter> subFilter() {
+//        FilterRegistrationBean<SubFilter> registrationBean = new FilterRegistrationBean<>();
+//        registrationBean.setFilter(new SubFilter());
+//        registrationBean.addUrlPatterns("/api/*");
+//        registrationBean.setOrder(2);
+//        return registrationBean;
+//    }
 
     @Bean(name = "customRestTemplate")
     public RestTemplate getRestTemplate() {
@@ -35,5 +48,13 @@ public class AppConfig {
         RestTemplate restTemplate = new RestTemplate(requestFactory);
         restTemplate.setErrorHandler(new RestTemplateResponseErrorHandler());
         return restTemplate;
+    }
+
+    @Bean(name = "customObjectMapper")
+    public ObjectMapper getObjectMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        return mapper;
     }
 }

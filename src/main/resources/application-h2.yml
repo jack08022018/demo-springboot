@@ -15,6 +15,9 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     show-sql: true
     # The SQL dialect makes Hibernate generate better SQL for the chosen database
+  jms:
+    listener:
+      auto-startup: false
   thymeleaf:
     cache: false
     check-template-location: true

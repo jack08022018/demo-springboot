@@ -1,9 +1,5 @@
 package com.demo;
 
-import com.demo.entity.mongoLocal.GroceryItem;
-import com.demo.repository.mongoLocal.GroceryItemRepository;
-import com.demo.repository.myDB.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,12 +10,6 @@ public class DemoSpringbootApplication implements CommandLineRunner {
 	public static void main(String[] args) {
 		SpringApplication.run(DemoSpringbootApplication.class, args);
 	}
-
-	@Autowired
-	ProductRepository productRepository;
-
-	@Autowired
-	GroceryItemRepository groceryItemRepository;
 
 	@Override
 	public void run(String... args) throws Exception {

@@ -1,22 +1,20 @@
 server:
   port: 9090
-  servlet:
-    context-path: /demo
-  undertow:
-    max-http-post-size: 0
+  servlet.context-path: /demo
+  undertow.max-http-post-size: 0
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: DEBUG
+    org.springframework.web.FilterChainProxy: DEBUG
+    org.springframework.web.client.RestTemplate: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.boot.autoconfigure: INFO
 
 spring:
-  application:
-    name: demo
-  main:
-    allow-bean-definition-overriding: true
-  logging:
-    level:
-      root: INFO
-      org.springframework.web: DEBUG
-      org.springframework.security: DEBUG
-      org.springframework.boot.autoconfigure: INFO
-      org.springframework.web.client.RestTemplate: DEBUG
+  application.name: demo
+  main.allow-bean-definition-overriding: true
   thymeleaf:
     cache: false
     check-template-location: true
@@ -27,38 +25,25 @@ spring:
   jpa:
     properties.hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     show-sql: true
-  jms:
-    listener:
-      auto-startup: false
+  jms.listener.auto-startup: false
+  jackson.default-property-inclusion: non_absent
 #    database: mysql
 #  datasource:
 #    url: jdbc:mysql://localhost:3306/myDB
 #    username: root
 #    password: 123456
-  jackson:
-    default-property-inclusion: non_absent
 
-logging:
-  level:
-    org:
-      springframework:
-        data:
-          mongodb:
-            core:
-              MongoTemplate: DEBUG
-
-app.datasource.mydb.url: jdbc:mysql://localhost:3306/myDB
-app.datasource.mydb.username: root
-app.datasource.mydb.password: 123456
+app.datasource.realdb.url: jdbc:mysql://52.197.35.82/b_monster?useSSL=false
+app.datasource.realdb.username: b_monster_pl
+app.datasource.realdb.password: h6L7_xqc
 
 app.datasource.sakila.url: jdbc:mysql://localhost:3306/sakila
 app.datasource.sakila.username: root
 app.datasource.sakila.password: 123456
 
-app.datasource.mongo-local.url: mongodb://localhost:27017
-app.datasource.mongo-local.database: test
-app.datasource.mongo-local.username:
-app.datasource.mongo-local.password:
+app.datasource.employee.url: jdbc:mysql://localhost:3306/employees
+app.datasource.employee.username: root
+app.datasource.employee.password: 123456
 
 #keycloak:
 #  enabled: true
