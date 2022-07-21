@@ -42,7 +42,7 @@ fun main() {
 //    val b: String? = null
 //    println(b?.length)
 
-    var rectangle = SalariesEntity(
+    val rectangle = SalariesEntity(
         salary = 11,
         currentPage = 1,
         empNo = 2
@@ -56,4 +56,5 @@ class Test(
 ) {
     var stringRepresentation: String = ""
         get() = this.toString()
+        set(value) {field = value}
 }
