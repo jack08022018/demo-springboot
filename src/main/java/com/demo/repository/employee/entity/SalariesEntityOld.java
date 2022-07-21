@@ -1,6 +1,5 @@
 package com.demo.repository.employee.entity;
 
-import com.demo.enums.Gender;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -19,7 +18,7 @@ import java.time.LocalDate;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 @Table(name = "salaries")
-public class SalariesEntity implements Serializable {
+public class SalariesEntityOld implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "emp_no")
