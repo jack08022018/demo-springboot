@@ -8,18 +8,21 @@ import com.demo.repository.realdb.MMusicRepository;
 import com.demo.repository.realdb.entity.MMusicEntity;
 import com.demo.repository.sakila.dto.MovieRentalInfo;
 import com.demo.service.ApiService;
+import com.demo.service.ExportService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
 import java.util.List;
@@ -33,6 +36,9 @@ public class ApiController {
 
     @Autowired
     private ApiService apiService;
+
+    @Autowired
+    private ExportService exportService;
 
     @Autowired
     @Qualifier("customObjectMapper")
@@ -82,6 +88,16 @@ public class ApiController {
                 .headers(headers)
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(new InputStreamResource(bis));
+    }
+
+    @GetMapping(value = "/exportExcel")
+    public ResponseEntity<Resource> exportExcel(@RequestParam("file") MultipartFile file) throws Exception {
+        InputStreamResource fileExport = new InputStreamResource(exportService.exportExcel(file));
+        return ResponseEntity
+                .ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=tutorials.xlsx")
+                .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
+                .body(fileExport);
     }
 
 }

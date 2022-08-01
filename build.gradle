@@ -53,6 +53,8 @@ dependencies {
 	testImplementation 'com.itextpdf:hyph:7.2.2'
 	implementation 'com.itextpdf:forms:7.2.2'
 	implementation 'com.itextpdf:itext-pdfa:5.5.13.3'
+	implementation group: 'org.apache.poi', name: 'poi', version: '5.2.2'
+	implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '5.2.2'
 
 //	test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
