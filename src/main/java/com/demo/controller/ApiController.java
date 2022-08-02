@@ -96,7 +96,8 @@ public class ApiController {
         return ResponseEntity
                 .ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=tutorials.xlsx")
-                .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+//                .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
                 .body(fileExport);
     }
 

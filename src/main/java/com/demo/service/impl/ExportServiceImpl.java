@@ -73,7 +73,7 @@ public class ExportServiceImpl implements ExportService {
 
     private void pushExcelData(Sheet sheet, Workbook workbook, List<EmployeeInfo> data, int currentRow, int colNums) {
         XSSFCellStyle styleNormal = getCellStyle(workbook, ExcelFormat.MORMAL);
-        Row row = sheet.createRow(currentRow);
+        Row row;
         Cell cell;
         for (int rowIndex = 0; rowIndex < data.size(); rowIndex++) {
             row = sheet.createRow(currentRow + rowIndex);
@@ -121,6 +121,6 @@ public class ExportServiceImpl implements ExportService {
     enum ExcelFormat {
         PERCENT,
         MONEY,
-        MORMAL;
+        MORMAL
     }
 }
