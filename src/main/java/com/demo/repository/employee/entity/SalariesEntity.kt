@@ -1,5 +1,6 @@
 package com.demo.repository.employee.entity
 
+import com.demo.enums.Gender
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.io.Serializable
@@ -23,6 +24,10 @@ open class SalariesEntity (
 
     @Column(name = "to_date")
     var toDate: LocalDate? = null,
+
+//    @Column(name = "gender")
+//    @Enumerated(EnumType.ORDINAL)
+//    var gender: Gender? = null,
 
     //    @Enumerated(EnumType.ORDINAL)
     //    @Column(name = "gender")
