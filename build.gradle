@@ -6,11 +6,11 @@ plugins {
 }
 jar {
 	archivesBaseName = 'demo-springboot'
-	archiveVersion = '0.1.1'
+//	archiveVersion = '0.1.1'
 }
 
 group = 'com'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 sourceCompatibility = '11'
 
 configurations {
