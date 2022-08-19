@@ -12,6 +12,10 @@ import com.demo.service.ExportService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.InputStreamResource;
@@ -40,6 +44,9 @@ public class ApiController {
     @Autowired
     private ExportService exportService;
 
+    private static Logger LOGGER = LoggerFactory.getLogger(ApiController.class);
+    private static final Marker IMPORTANT = MarkerFactory.getMarker("IMPORTANT");
+
     @Autowired
     @Qualifier("customObjectMapper")
     private ObjectMapper mapper;
@@ -60,6 +67,8 @@ public class ApiController {
         JsonNode jsonNode = mapper.readTree(jsonStr);
 //        String json = "{\"id\": 49, \"name\": \"小林　利奈\", \"type\": 1}";
 //        return mapper.readTree(json);
+        LOGGER.info("This is a log message that is not important!");
+        LOGGER.info(IMPORTANT, "This is a very important log message!");
         return jsonNode;
     }
 

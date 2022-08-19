@@ -14,10 +14,28 @@ fun main() {
 //    test.stringRepresentation = "asd"
 
 //    println(ObjectMapper().writeValueAsString(test))
-    println(ObjectMapper().writeValueAsString(log))
+//    println(ObjectMapper().writeValueAsString(log))
 
     var enum = Direction.valueOf("NORTH")
-    println(enum)
+//    println(enum)
+
+    var x : Int = 2
+    when(x) {
+        2 -> println("This is 2")
+        3,4,5,6,7,8 -> println("When x is any number from 3,4,5,6,7,8")
+        in 9..15 -> println("When x is something from 9 to 15")
+        //if you want to perform some action
+        in 20..25 -> {
+            val action = "Perform some action"
+            println(action)
+        }
+        else -> println("When x does not belong to any of the above case")
+    }
+
+    val map = mapOf("a" to 1, "b" to 2, "c" to 3)
+    for ((k, v) in map) {
+        println("$k -> $v")
+    }
 }
 class Test(
     val name: String? = null,
