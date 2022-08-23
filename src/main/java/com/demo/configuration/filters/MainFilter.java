@@ -18,7 +18,7 @@ public class MainFilter implements Filter {
                          FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        System.out.println("MainFilter");
+//        System.out.println("MainFilter");
 //        String url = request.getRequestURI();
 //        if(url.contains("/decrypt")) {
 //            response.setStatus(401);
