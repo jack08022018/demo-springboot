@@ -1,14 +1,11 @@
 package com.demo.controller;
 
 
-import com.demo.pdf.PDFGenerator;
 import com.demo.repository.employee.dto.EmployeeInfo;
-import com.demo.repository.employee.entity.SalariesEntity;
 import com.demo.repository.realdb.MMusicRepository;
 import com.demo.repository.realdb.entity.MMusicEntity;
 import com.demo.repository.sakila.dto.MovieRentalInfo;
 import com.demo.service.ApiService;
-import com.demo.service.ExportService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,17 +15,10 @@ import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayInputStream;
 import java.util.List;
 
 @RestController
@@ -40,9 +30,6 @@ public class ApiController {
 
     @Autowired
     private ApiService apiService;
-
-    @Autowired
-    private ExportService exportService;
 
     private static Logger LOGGER = LoggerFactory.getLogger(ApiController.class);
     private static final Marker IMPORTANT = MarkerFactory.getMarker("IMPORTANT");
@@ -85,29 +72,6 @@ public class ApiController {
     @GetMapping(value = "/getSalaryByAmount")
     public List<EmployeeInfo> getSalaryByAmount(@RequestBody ModelMap params) {
         return apiService.getEmployeeSalary((Integer) params.get("amount"));
-    }
-
-    @GetMapping(value = "/exportPdf", produces = MediaType.APPLICATION_PDF_VALUE)
-    public ResponseEntity<InputStreamResource> exportPdf() throws Exception {
-        ByteArrayInputStream bis = PDFGenerator.getPdfReport();
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Disposition", "inline; filename=customers.pdf");
-        return ResponseEntity
-                .ok()
-                .headers(headers)
-                .contentType(MediaType.APPLICATION_PDF)
-                .body(new InputStreamResource(bis));
-    }
-
-    @GetMapping(value = "/exportExcel")
-    public ResponseEntity<Resource> exportExcel(@RequestParam("file") MultipartFile file) throws Exception {
-        InputStreamResource fileExport = new InputStreamResource(exportService.exportExcel(file));
-        return ResponseEntity
-                .ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=tutorials.xlsx")
-                .contentType(MediaType.APPLICATION_OCTET_STREAM)
-//                .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
-                .body(fileExport);
     }
 
 }

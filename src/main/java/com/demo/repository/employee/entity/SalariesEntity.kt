@@ -14,16 +14,16 @@ open class SalariesEntity (
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "emp_no")
-    var empNo: Int? = 0,
+    open var empNo: Int? = 0,
 
     @Column(name = "salary")
-    var salary: Int? = null,
+    open var salary: Int? = null,
 
     @Column(name = "from_date")
-    var fromDate: LocalDate? = null,
+    open var fromDate: LocalDate? = null,
 
     @Column(name = "to_date")
-    var toDate: LocalDate? = null,
+    open var toDate: LocalDate? = null,
 
 //    @Column(name = "gender")
 //    @Enumerated(EnumType.ORDINAL)
@@ -34,10 +34,10 @@ open class SalariesEntity (
     //    private Gender gender;
     @Transient
     @JsonProperty
-    var pageSize: Int? = null,
+    open var pageSize: Int? = null,
 
     @Transient
     @JsonProperty
-    var currentPage: Int? = null
+    open var currentPage: Int? = null
 
 ) : Serializable
