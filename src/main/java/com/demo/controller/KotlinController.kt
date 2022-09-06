@@ -21,7 +21,6 @@ class KotlinController {
     @GetMapping("/getSalaryByAmount")
     fun getSalaryByAmount(@RequestBody params : ModelMap): List<Any?>? {
         val data = salariesRepository.getEmployeeSalary(params["amount"] as Int)
-//        return salariesRepository.findAllById(listOf(253406))
 //        val email = values["email"] ?: throw IllegalStateException("Email is missing!")
         return data
                 .filter { s -> s.salary > 38623 }
