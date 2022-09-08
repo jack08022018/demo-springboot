@@ -2,6 +2,8 @@ package com.demo.controller;
 
 
 import com.demo.repository.employee.dto.EmployeeInfo;
+import com.demo.repository.mongoLocal.GroceryItemRepository;
+import com.demo.repository.mongoLocal.entity.GroceryItem;
 import com.demo.repository.realdb.MMusicRepository;
 import com.demo.repository.realdb.entity.MMusicEntity;
 import com.demo.repository.sakila.dto.MovieRentalInfo;
@@ -16,6 +18,8 @@ import org.slf4j.MarkerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,14 +42,24 @@ public class ApiController {
     @Qualifier("customObjectMapper")
     private ObjectMapper mapper;
 
+    @Autowired
+    GroceryItemRepository groceryItemRepository;
+
+    @Autowired
+    MongoTemplate mongoTemplate;
+
+    @PostMapping(value = "/addUser")
+    @Transactional(rollbackFor = Exception.class)
+    public void addUser() {
+//        productService.addUser();
+//        mongoTemplate.save(new GroceryItem("AAA", "Whole Wheat Biscuit", 5, "snacks"));
+        groceryItemRepository.save(new GroceryItem("AAA", "Whole Wheat Biscuit", 5, "snacks"));
+//        int a = 1/0;
+    }
+
     @PostMapping(value = "/groceries")
-    public List<MMusicEntity> groceries() {
-        MMusicEntity e = MMusicEntity.builder()
-                .name("a")
-                .labelName("label")
-                .build();
-//        return Arrays.asList(e);
-        return mMusicRepository.findAll();
+    public <T> List<T> groceries() {
+        return (List<T>) groceryItemRepository.findAll();
     }
 
     @PostMapping("/getProductData")
