@@ -1,4 +1,4 @@
-//package com.demo.common.kotlin
+package com.demo.common.kotlin
 //
 //import com.fasterxml.jackson.databind.ObjectMapper
 //
