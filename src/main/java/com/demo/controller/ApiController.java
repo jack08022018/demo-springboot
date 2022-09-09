@@ -2,6 +2,7 @@ package com.demo.controller;
 
 
 import com.demo.repository.employee.dto.EmployeeInfo;
+import com.demo.repository.employee.entity.SalariesEntity;
 import com.demo.repository.mongoLocal.GroceryItemRepository;
 import com.demo.repository.mongoLocal.entity.GroceryItem;
 import com.demo.repository.realdb.MMusicRepository;
@@ -19,9 +20,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -50,7 +55,9 @@ public class ApiController {
 
     @PostMapping(value = "/addUser")
     @Transactional(rollbackFor = Exception.class)
-    public void addUser() {
+    public void addUser() throws JsonProcessingException {
+        String s = "";
+        SalariesEntity e = mapper.readValue(s, SalariesEntity.class);
 //        productService.addUser();
 //        mongoTemplate.save(new GroceryItem("AAA", "Whole Wheat Biscuit", 5, "snacks"));
         groceryItemRepository.save(new GroceryItem("AAA", "Whole Wheat Biscuit", 5, "snacks"));
@@ -86,6 +93,22 @@ public class ApiController {
     @GetMapping(value = "/getSalaryByAmount")
     public List<EmployeeInfo> getSalaryByAmount(@RequestBody ModelMap params) {
         return apiService.getEmployeeSalary((Integer) params.get("amount"));
+    }
+
+    @Autowired
+    @Qualifier("customRestTemplate")
+    private RestTemplate restTemplate;
+
+    @PostMapping(value = "/rest")
+    public void rest() {
+        String params = "{\"name\":\"admin\",\"age\":\"15\"}";
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> request = new HttpEntity<String>(params, headers);
+
+        String url = "http://localhost:9092/security/api/rest";
+        JsonNode response = restTemplate.postForObject(url, request, JsonNode.class);
+        System.out.println(response.toString());
     }
 
 }
