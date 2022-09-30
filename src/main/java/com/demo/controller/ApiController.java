@@ -70,13 +70,14 @@ public class ApiController {
     }
 
     @PostMapping("/getProductData")
-    JsonNode getProductData() throws JsonProcessingException {
+    JsonNode getProductData(@RequestBody ModelMap params) throws JsonProcessingException {
         String jsonStr = "{\"ownerArray\":[{\"id\":1,\"value\":\"John Nash\"},{\"id\":2,\"value\":\"Leonhard Euler\"},{\"id\":3,\"value\":\"Alan Turing\"}],\"categoryArray\":[{\"id\":1,\"value\":\"Clothing\"},{\"id\":2,\"value\":\"Jewelery\"},{\"id\":3,\"value\":\"Accessory\"}]}";
         JsonNode jsonNode = mapper.readTree(jsonStr);
 //        String json = "{\"id\": 49, \"name\": \"小林　利奈\", \"type\": 1}";
 //        return mapper.readTree(json);
         LOGGER.info("This is a log message that is not important!");
         LOGGER.info(IMPORTANT, "This is a very important log message!");
+        System.out.println(mapper.writeValueAsString(params));
         return jsonNode;
     }
 
